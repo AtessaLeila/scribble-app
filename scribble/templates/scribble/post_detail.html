@@ -1,0 +1,17 @@
+{% extends 'scribble/base.html' %} {% block content %}
+<h2>{{ post.author }}
+    <a href="{% url 'post_edit' pk=post.pk %}">(edit)</a>
+    <a href="{% url 'post_delete' pk=post.pk %}">(delete)</a>
+</h2>
+<h4>{{ post.title }}</h4>
+<h5>{{post.body}}</h5>
+
+<h3>Comments <a href="{% url 'comment_create' %}">(+)</a></h3>
+<ul>
+    {% for comment in post.comments.all %}
+    <li>
+        <a href="{% url 'comment_detail' pk=comment.pk %}">{{ comment.author }}-{{ comment.body }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
